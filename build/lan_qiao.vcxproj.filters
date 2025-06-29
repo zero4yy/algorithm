@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\GCD和LCM\gcd和lcm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\GCD和LCM\等差数列.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\快速幂\快速幂.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\快速幂\模运算.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\快速幂\越狱.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\素数\素数判定.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\素数\素数筛.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\素数\选数.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\素数\质因数分解.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\素数\素数筛_LR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\二叉树\二叉树的存储.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\二叉树\二叉树的遍历.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\前缀和与差分\前缀和_求和.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\前缀和与差分\前缀和_可获得的最小取值.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\前缀和与差分\前缀和_异或运算.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\前缀和与差分\差分模板.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\dfs\dfs模板.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\study\algorithm\lan_qiao\dfs\dfs与排列.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\study\algorithm\lan_qiao\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5BE2DA75-4A80-3225-A553-0FE1C36F3B3C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

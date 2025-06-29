@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="zh-CN">
+ <head> 
+  <meta charset="utf-8"> 
+  <link rel="canonical" href="https://blog.csdn.net/nikolalala/article/details/118334704"> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="renderer" content="webkit"> 
+  <meta name="force-rendering" content="webkit"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <meta name="report" content="{&quot;pid&quot;: &quot;blog&quot;, &quot;spm&quot;:&quot;1001.2101&quot;}"> 
+  <meta name="referrer" content="always"> 
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="alternate" media="handheld" href="#"> 
+  <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"> 
+  <meta name="applicable-device" content="pc"> 
+  <link href="https://g.csdnimg.cn/static/logo/favicon32.ico" rel="shortcut icon" type="image/x-icon"> 
+  <title>湖南大学算法分析与设计期末总复习上（分治、动态规划，贪心部分）_分治法期末-CSDN博客</title>  
+  <meta name="keywords" content="分治法期末"> 
+  <meta name="csdn-baidu-search" content="{&quot;autorun&quot;:true,&quot;install&quot;:true,&quot;keyword&quot;:&quot;分治法期末&quot;}"> 
+  <meta name="description" content="文章浏览阅读1.7k次，点赞8次，收藏51次。这篇博客汇总了湖南大学算法分析与设计课程的期末复习内容，涵盖分治法（如二分搜索、归并排序、快速排序）、动态规划（矩阵连乘、最优化问题）和贪心法（哈弗曼编码、单源最短路径、最小生成树）等。博主强调了算法思想、代码实现、时间复杂度和应用的重要性，并提醒注意动态规划中的子问题重叠性质。
+"> 
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-f01bac114a.min.css">  
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin-sea/skin-sea-d3a08c2048.min.css">    
+  <meta name="toolbar" content="{&quot;type&quot;:&quot;0&quot;,&quot;fixModel&quot;:&quot;1&quot;}">    
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css"> 
+  <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>    
+ 	<style>
+	main div.blog-content-box pre {
+		max-height: 100%;
+		overflow-y: hidden;
+	}
+	</style>
+ </head>  
+ <body class="nodata  " style=""> 
+  <div id="toolbarBox" style="min-height: 48px;"></div>    
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css"> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css"> 
+  <link rel="stylesheet" href="https://g.csdnimg.cn/lib/swiper/6.0.4/css/swiper.css">   
+  <div class="main_father clearfix d-flex justify-content-center mainfather-concision" style="height:100%;"> 
+   <div class="container clearfix container-concision" id="mainBox">  
+    <main>  
+     <div class="blog-content-box"> 
+      <div class="article-header-box"> 
+       <div class="article-header"> 
+        <div class="article-title-box"> 
+         <h1 class="title-article" id="articleContentId">湖南大学算法分析与设计期末总复习上（分治、动态规划，贪心部分）</h1> 
+        </div> 
+        <div class="article-info-box"> 
+         <div class="article-bar-top"> 
+          <img class="article-type-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/original.png" alt=""> 
+          <div class="bar-content"> 
+           <a href="https://mall.csdn.net/vip" data-report-query="spm=3001.10404" data-report-click="{&quot;spm&quot;:&quot;3001.10404&quot;}" data-report-view="{&quot;spm&quot;:&quot;3001.10404&quot;}" class="article-vip-box" target="_blank"><img class="article-vip-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/identityVipNew.png" alt=""></a> 
+           <a class="follow-nickName " href="https://blog.csdn.net/nikolalala" target="_blank" rel="noopener" title="iamnii-">iamnii-</a> 
+           <img class="article-time-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUpTime2.png" alt=""> 
+           <span class="time">已于&nbsp;2022-04-25 15:09:41&nbsp;修改</span> 
+           <div class="read-count-box"> 
+            <img class="article-read-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/articleReadEyes2.png" alt=""> 
+            <span class="read-count">阅读量1.7k</span> 
+            <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" alt=""> <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" alt=""> <span class="name">收藏</span> <span class="get-collection"> 51 </span> </a> 
+            <div class="read-count-box is-like"> 
+             <img class="article-read-img article-heard-img" style="display:none" id="is-like-imgactive-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Active.png" alt=""> 
+             <img class="article-read-img article-heard-img" style="display:block" id="is-like-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Black.png" alt=""> 
+             <span class="read-count" id="blog-digg-num">点赞数 8 </span> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="blog-tags-box"> 
+          <div class="tags-box artic-tag-box"> 
+           <span class="label">分类专栏：</span> 
+           <a class="tag-link" href="https://blog.csdn.net/nikolalala/category_11168488.html" target="_blank" rel="noopener">算法分析与设计</a> 
+           <span class="label">文章标签：</span> 
+           <a rel="noopener" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;c++&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;c++\&quot;}&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;c++&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;c++\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=c%2B%2B&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank">c++</a> 
+           <a rel="noopener" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;算法&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;算法\&quot;}&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;算法&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;算法\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=%E7%AE%97%E6%B3%95&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank">算法</a> 
+          </div> 
+         </div> 
+         <div class="up-time">
+          <span>于&nbsp;2021-06-29 15:33:23&nbsp;首次发布</span>
+         </div> 
+         <div class="slide-content-box"> 
+          <div class="article-copyright"> 
+           <div class="creativecommons">
+             版权声明：本文为博主原创文章，遵循
+            <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。 
+           </div> 
+           <div class="article-source-link">
+             本文链接：
+            <a href="https://blog.csdn.net/nikolalala/article/details/118334704" target="_blank">https://blog.csdn.net/nikolalala/article/details/118334704</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="operating"> 
+          <a class="href-article-edit slide-toggle">版权</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="blogHuaweiyunAdvert"></div> 
+      <div class="ai-abstract-box"> 
+       <div class="ai-abstract"> 
+        <div class="abstract-content"> 
+         <img class="lock-img" src="https://img-home.csdnimg.cn/images/20240711042549.png" alt=""> 这篇博客汇总了湖南大学算法分析与设计课程的期末复习内容，涵盖分治法（如二分搜索、归并排序、快速排序）、动态规划（矩阵连乘、最优化问题）和贪心法（哈弗曼编码、单源最短路径、最小生成树）等。博主强调了算法思想、代码实现、时间复杂度和应用的重要性，并提醒注意动态规划中的子问题重叠性质。 
+        </div> 
+        <span>摘要由CSDN通过智能技术生成</span> 
+       </div> 
+      </div> 
+      <article class="baidu_pl"> 
+       <div id="article_content" class="article_content clearfix"> 
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css"> 
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-704d5b9767.css"> 
+        <div id="content_views" class="markdown_views prism-atom-one-dark"> 
+         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> 
+          <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path> 
+         </svg> 
+         <pre><code>							by--iamnii
+</code ></pre> 
+         <p>这个是我期末考试自己做的总结，把书的重点内容基本梳理了一遍，但是有些上课没有讲的算法就没有归纳，大家可以结合自己老师讲的内容再深入复习。</p> 
+         <p>另外，HNU算法考试基本都是算法思想、代码、应用、时间复杂度几个部分，所以总结的时候也是集中关注这几部分，希望对大家有帮助~</p> 
+         <p>PS：有“应用”的部分一定要会画图或者打表，期中考试考过（活动安排问题之类的）的我就暂时没有总结，有时间再补充吧</p> 
+         <h2><a id="_7"></a><em>分治法</em></h2> 
+         <p>1、基本思想：<br> 将规模为n的问题分为k个规模较小的子问题。子问题和原问题相同且相互独立。递归地解决子问题并将子问题的解合并为原问题的解。一般而言，将问题分为大小相近的子问题是最有效率的。通常将问题一分为二。</p> 
+         <p>2、算法复杂度（重点关注主定理）：<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/b45c00ac14566fe2f9cbfbef65283a25.png" alt="在这里插入图片描述"><img src="https://i-blog.csdnimg.cn/blog_migrate/33694c1810596d198bfa7c2c599bac29.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_14"></a>二分搜索</h3> 
+         <h4><a id="1_15"></a>1、算法思想：</h4> 
+         <p>将n个元素分成个数大致相同的两半，取a[n/2]与x作比较，如果x= a[n/2]，则找到x，算法终止；如果x&lt; a[n/2]，则只在数组左半部分继续搜索x；如果x&gt; a[n/2]，则只在数组a的右半部分继续搜索x。</p> 
+         <h4><a id="2httpsimgblogcsdnimgcn20210629144131753png_17"></a>2、时间复杂度<img src="https://i-blog.csdnimg.cn/blog_migrate/43386c3ade6c1e3642ec38be18ef5984.png" alt="在这里插入图片描述"></h4> 
+         <h4><a id="3_18"></a>3、代码</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/f0ac734bc73b6772e4f322acc9975fd6.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_21"></a>归并排序</h3> 
+         <h4><a id="1_22"></a>1、算法思想：</h4> 
+         <p>递归：将待排序元素分成大小大致相同的两个子集合，分别对两个子集合进行排序，最终将排好序的子集合合并成所要求的排好序的集合。<br> 非递归：<br> 首先将数组a中相邻元素两两配对，用合并算法将它们排序，构成n/2组长度为2的排好序的子数组段，然后再将它们排序成长度为4的排好序的子数组段，如此继续下去，直到整个数组排好序。</p> 
+         <h4><a id="2httpsimgblogcsdnimgcn20210629145846259png_26"></a>2、算法复杂度<img src="https://i-blog.csdnimg.cn/blog_migrate/7f12335fa796e809d03f4afb8bcc87a1.png" alt="在这里插入图片描述"></h4> 
+         <h4><a id="3_27"></a>3、代码</h4> 
+         <p>（1）递归实现<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/caebac6c03d771d5313bc2a2bb63ccd9.png" alt="在这里插入图片描述"><br> （2）非递归<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/0e6c52e1187e160342a7d616d49061db.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="4_32"></a>4、应用</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/1ad0dad16f25037a0614d3c45bb46563.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_34"></a>快速排序</h3> 
+         <h4><a id="1_35"></a>1、算法思想：</h4> 
+         <p>①分解（Divide)：以a[p]为基准元素将a[p:r]划分成3段alp:q-1]，a[q]和a[q+1:r]，使a[p:q-1]中任何一个元素小于等于a[q]，而 a[q+1:r]中任何一个元素大于等于a[q]，下标q在划分过程中确定。<br> ②递归求解（Conquer）：通过递归调用快速排序算法，分别对a[p:q-1]和 a[q+1:r]进行排序。<br> ③合并(Merge):由于对a[p:q-1]和a[q+1:r]的排序是就地进行的，因此在a[p:q-1]和a[q+1:r]都已排好的序后，不需要执行任何计算，a[p:r]则已排好序。</p> 
+         <h4><a id="2_39"></a>2、算法复杂度</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/c4c123eea336858deca7dd2f6a43d61f.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="3_41"></a>3、代码</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/688f239542eed03ba259cff5ead5a26d.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_43"></a>大整数乘法</h3> 
+         <p>1、算法设计：<br> 这个算法的式子和时间复杂度都要会自己推导，这部分内容比较集中，建议看书<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/be9676132837ec9b9473064f8757251d.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/4f56be0947b781cfdce8c6f661792e7f.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/bec4e514e0dad60c27f469d78b9f77f8.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_49"></a>斯特拉森矩阵（了解）</h3> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/42047d2f5b0d08ebd0fc20741c911b95.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/75e24ab28594833c8c6e7ddac159caa3.png" alt="在这里插入图片描述"></p> 
+         <h2><a id="_52"></a><em>动态规划</em></h2> 
+         <p>（简答题部分）<br> 1、动态规划法定义：一种适用于解最优化问题，通过开辟一个空间存储子问题的最优解，在后续进行更新调用的解决多阶段决策问题的方法。</p> 
+         <p>2、动态规划法指导思想：将待求解问题分解成若干子问题，在每种情况下，列出所有可能的局部解，并保存在表中，从局部解中挑出可能产生最佳结果的继续进行。</p> 
+         <p>3、动态规划法步骤：<br> ①找出最优解的性质，并刻画其结构特征；<br> ②递归地定义最优值；<br> ③以自底向上的方式计算最优值；<br> ④根据计算最优值时得到的信息，构造最优解。</p> 
+         <p><strong>4、动态规划法基本要素：</strong><br> <strong>①、最优子结构性质</strong>（原问题的最优解包含了其子问题的最优解）；<br> <strong>②、子问题重叠性质</strong>（当自顶向下递归解决问题时，每次产生的子问题不总是新问题，有些子问题被重复计算）。<br> 动态规划法的核心是每个子问题只求解一次，将解保存在一个表格中</p> 
+         <p><strong>5. 分治法与动态规划的异同</strong><br> 主要共同点:<br> ①、都要求原问题具有最优子结构性质；<br> ②、都是将原问题分而治之，分解成若干个规模较小的子问题，然后将子问题的解合并，形成原问题的解；<br> 主要区别:<br> ①、子问题性质区别：分治法将分解后的子问题看成相互独立的；动态规划将分解后的子问题理解为相互间有联系，有子问题重叠性质；<br> ③ 、实现方法区别：分治法通常利用递归自顶向下求解；动态规划通常利用迭代法自底向上求解，但也能用具有记忆功能的递归法自顶向下求解；</p> 
+         <p>6.如何验证最优子结构特性<br> 先写出问题的最优解和子问题的最优解的关系，然后假定问题的最优解成立（上面关系的左边成立），看能否得到子问题的最优解就是关系式右边的子问题最优解的形式，如果是就验证了最优子结构（一般用反证法）。</p> 
+         <p>7、01背包问题之所以不能使用贪心算法而只能使用动态规划是因为01背包问题没办法装满整个背包，所以存在空间浪费，从而导致价值的改变。</p> 
+         <h3><a id="_82"></a>矩阵连乘问题（考应用可能大）</h3> 
+         <p>动态规划部分都一定要会写递推公式和打表应用</p> 
+         <h4><a id="1_84"></a>1、算法思想：</h4> 
+         <p>将矩阵连乘积AIAI+1…AJ记为A[I:J]，考察计算A[1:N]的最优计算次序，设这个计算次序在矩阵A[k]（1&lt;=k&lt;n）和AK+1之间将矩阵链断开。<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/1ffbde3bd236bf0136d723243e4c4f81.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/b109c2396a532f3adb98fc3c4ebcc536.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/e5276e25eea334ac2515a221818b1441.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="2_89"></a>2、算法复杂度：</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/0fba184190527c8333925248d2455093.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="3_91"></a>3、应用：</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/90d7f15452ca21a969215e4b3b46a5ea.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/e28bc0e701a9cf78fb26ff0f02b3b377.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_94"></a>凸多边形最优三角剖分问题</h3> 
+         <h4><a id="1_95"></a>1、算法思想：</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/499786c607abe8783786f8f7adb5976a.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/cf8f7306fe0007d87476023f6b019f23.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="2_98"></a>2、时间复杂度：</h4> 
+         <p>占用空间为一个二维表，所以<strong>空间复杂度为O（n<sup>2</sup>）</strong>，填格子需要n<sup>2</sup>的工作量，在每个格子内要n的时间找最小值，因此<strong>时间复杂度为O（n<sup>3</sup>）</strong></p> 
+         <h4><a id="3_100"></a>3、代码(应该不会要求写)</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/0231f1dad87e7e962a4ebe904bda9bf4.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="4_102"></a>4、应用</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/efcbabdaaf29a2cabef086db2c5a5dd1.png" alt="在这里插入图片描述"><br> <img src="https://i-blog.csdnimg.cn/blog_migrate/7c206bb4590110be011e0a2c1a442fd2.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_106"></a>最长公共子序列问题</h3> 
+         <h4><a id="1_107"></a>1、算法思想：</h4> 
+         <p>（1）最优子结构性质<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/59b025940cc5a0801e9c49c6e0c69683.png" alt="在这里插入图片描述"><br> （2）子问题的递归结构<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/e5c1dc62316124c2c869fcc42fff55ea.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="2_112"></a>2、时间复杂度</h4> 
+         <p>在所考虑的子问题空间，共有θ（mn）个不同的子问题，且每个数组单元的计算耗费O（1）的时间，因此算法LCSlength耗时<strong>O（mn）</strong>。</p> 
+         <h3><a id="_115"></a>最大子段和问题</h3> 
+         <h4><a id="_116"></a>一、普通解法（略）</h4> 
+         <h4><a id="_117"></a>二、分治法</h4> 
+         <h5><a id="1_118"></a>1、算法思想：</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/459bfc68c4490cfd9bdc6ec315893295.png" alt="在这里插入图片描述"><img src="https://i-blog.csdnimg.cn/blog_migrate/4b47f62e9cb91762fc6d8302f670f4ca.png" alt="在这里插入图片描述"></p> 
+         <h5><a id="2_120"></a>2、时间复杂度</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/d70ad184f34fe0ce2c7328869ac97277.png" alt="在这里插入图片描述"></p> 
+         <h5><a id="3_122"></a>3、代码</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/f0665dacbc2d6eeec01c41db4f647f60.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_124"></a>三、动态规划：</h3> 
+         <h5><a id="1_125"></a>1、算法思想：</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/6dec69f041ddac4256df38f7a7d051f5.png" alt="在这里插入图片描述"></p> 
+         <h5><a id="2_127"></a>2、时间复杂度：</h5> 
+         <p><strong>O（n）</strong></p> 
+         <h5><a id="3_129"></a>3、代码</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/2b86432ebaa56b66ce931364e450c96f.png" alt="在这里插入图片描述"></p> 
+         <h5><a id="4_131"></a>4、应用</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/36f6f0fc892b45ea3c5f819ac00366cb.png" alt="在这里插入图片描述"></p> 
+         <h2><a id="_133"></a><em>贪心法</em></h2> 
+         <p>要求会证明谈心选择性质<br> <strong>1、性质：</strong><br> **<strong>贪心选择性质</strong>（所求问题的整体最优解可以通过一系列局部最优选择得到）；<br> <strong>最优子结构性质</strong>。</p> 
+         <p><strong>2、与动态规划的区别：</strong><br> ①、动态规划算法通常以<strong>自底向上</strong>的方式解各子问题，而贪心算法则通常以<strong>自顶向下</strong>的方式进行<br> ②、动态规划中的每步选择多依赖于相关子问题的解，因为只有解出相关子问题后才能做出选择；贪心算法中每步选择只需要局部最优，选择可依赖以前的选择，但不能依赖将来的选择，也不能依赖子问题的解<br> ③、贪心算法的每一步直接对结果产生影响，动态规划不一定<br> ④、贪心算法对每个子问题的解决方案都作出选择，不能回退；动态规划会根据以前的选择结果对当前进行选择，可以回退<br> ⑤、动态规划只要运用于二维或三维，贪心一般是一维</p> 
+         <p>3、基本思路：从问题的初始状态开始，每次找最优解，直到得到整个问题的最优解</p> 
+         <p>4、证明贪心选择性质：先考察问题的一个整体最优解，并证明可以修改最优解顺序来满足贪心选择性质，即每次都取局部最优解，然后通过最优子结构性质进行证明，通过数学归纳法证明整个问题都有贪心选择性质</p> 
+         <h3><a id="_149"></a>哈弗曼编码</h3> 
+         <p>平均传输位数概念：<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/10f876fd27e3ca8e7ff6195d041a9ca1.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="1_152"></a>1、算法思想：</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/3a4400f25d33e61eaba067db3ea625b4.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="2_154"></a>2.时间复杂度</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/e91eb594eb0913e23a614b4bf3ed5465.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="3_156"></a>3、性质证明：</h4> 
+         <p>（1）、证明哈夫曼树最优</p> 
+         <blockquote> 
+          <p><img src="https://i-blog.csdnimg.cn/blog_migrate/dba42829ad63b8cc648042f11f00f19a.png" alt=""></p> 
+         </blockquote> 
+         <p>（2）、证明贪心选择性质<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/319281dd448a0cbee5bd80caf3fde941.png" alt="在这里插入图片描述"><img src="https://i-blog.csdnimg.cn/blog_migrate/9cd7cea4e76c6b74924318651b95b572.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_162"></a>单源最短路径</h3> 
+         <h4><a id="1_163"></a>1、算法思想</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/bcb566de51131b4f9a0d313183a0d3c2.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="2_165"></a>2、时间复杂度：</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/0e68c3cb8b768679ca70fc61b1d53afa.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="3_167"></a>3、应用</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/4fb0cf46051d9714067b1a67fd4192a6.png" alt="在这里插入图片描述"></p> 
+         <h4><a id="4_169"></a>4、性质证明</h4> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/0e92f03732f7872cdd5dc8a507d698d7.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_171"></a>最小生成树</h3> 
+         <h4><a id="Prim_172"></a>一、Prim算法</h4> 
+         <h5><a id="1_173"></a>1、算法思想：</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/8be6ccccea262e3f9c882a7580c30f0f.png" alt="在这里插入图片描述"></p> 
+         <h5><a id="2On2_175"></a>2、时间复杂度：O（n2）</h5> 
+         <h4><a id="Kruskal_176"></a>二、Kruskal算法</h4> 
+         <h5><a id="1_177"></a>1、算法思想</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/c4d0496d9d8b9539dcb214c9951aa53b.png" alt="在这里插入图片描述"></p> 
+         <h5><a id="2_179"></a>2、时间复杂度</h5> 
+         <p><img src="https://i-blog.csdnimg.cn/blog_migrate/1fa1db978b1c83ac5658dce9bd4e39e2.png" alt="在这里插入图片描述"></p> 
+         <h3><a id="_181"></a>多机调度问题</h3> 
+         <p>吐槽一下，这个算法老师上课其实也没有重点讲，但是期末考爆冷考了好几个类似的题。。。<br> 1、算法思想：<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/a069485d16be8e004f4693ea2bdbeea9.png" alt="在这里插入图片描述"><br> 2、时间复杂度<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/31ca49aeecfeaf71eeca7f65f6fba5da.png" alt="在这里插入图片描述"><br> 3、应用<br> <img src="https://i-blog.csdnimg.cn/blog_migrate/a159f850c7793557b23e86e21b032f25.png" alt="在这里插入图片描述"></p> 
+        </div> 
+        <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-f23dff6052.css" rel="stylesheet"> 
+        <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-e504d6a974.css" rel="stylesheet"> 
+       </div> 
+      </article>  
+     </div> 
+     <div class="directory-boxshadow-dialog" style="display:none;"> 
+      <div class="directory-boxshadow-dialog-box"> 
+      </div> 
+      <div class="vip-limited-time-offer-box-new" id="vip-limited-time-offer-box-new"> 
+       <img class="limited-img limited-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-newWhite.png"> 
+       <div class="vip-limited-time-top">
+         确定要放弃本次机会？ 
+       </div> 
+       <span class="vip-limited-time-text">福利倒计时</span> 
+       <div class="limited-time-box-new"> 
+        <span class="time-hour"></span> 
+        <i>:</i> 
+        <span class="time-minite"></span> 
+        <i>:</i> 
+        <span class="time-second"></span> 
+       </div> 
+       <div class="limited-time-vip-box"> 
+        <p> <img class="coupon-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-roup.png"> <span class="def">立减 ¥</span> <span class="active limited-num"></span> </p> 
+        <span class="">普通VIP年卡可用</span> 
+       </div> 
+       <a class="limited-time-btn-new" href="https://mall.csdn.net/vip" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.9621&quot;}" data-report-query="spm=1001.2101.3001.9621">立即使用</a> 
+      </div> 
+     </div> 
+     <div class="more-toolbox-new more-toolbar" id="toolBarBox"> 
+      <div class="left-toolbox"> 
+       <div class="toolbox-left"> 
+        <div class="profile-box"> 
+         <a class="profile-href" target="_blank" href="https://blog.csdn.net/nikolalala"><img class="profile-img" src="https://profile-avatar.csdnimg.cn/a2aab5fb8a91466f858863a9fcbb7556_nikolalala.jpg!1"> <span class="profile-name"> iamnii- </span> </a> 
+        </div> 
+        <div class="profile-attend"> 
+         <a class="tool-attend tool-bt-button tool-bt-attend" href="javascript:;" data-report-view="{&quot;mod&quot;:&quot;1592215036_002&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;extend1&quot;:&quot;关注&quot;}">关注</a> 
+         <a class="tool-item-follow active-animation" style="display:none;">关注</a> 
+        </div> 
+       </div> 
+       <div class="toolbox-middle"> 
+        <ul class="toolbox-list"> 
+         <li class="tool-item tool-item-size tool-active is-like" id="is-like"> <a class="tool-item-href"> <img style="display:none;" id="is-like-imgactive-animation-like" class="animation-dom active-animation" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarThumbUpactive.png" alt=""> <img class="isactive" style="display:none" id="is-like-imgactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/like-active.png" alt=""> <img class="isdefault" style="display:block" id="is-like-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/like.png" alt=""> <span id="spanCount" class="count "> 8 </span> </a> 
+          <div class="tool-hover-tip">
+           <span class="text space">点赞</span>
+          </div> </li> 
+         <li class="tool-item tool-item-size tool-active is-unlike" id="is-unlike"> <a class="tool-item-href"> <img class="isactive" style="margin-right:0px;display:none" id="is-unlike-imgactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/unlike-active.png" alt=""> <img class="isdefault" style="margin-right:0px;display:block" id="is-unlike-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/unlike.png" alt=""> <span id="unlikeCount" class="count "></span> </a> 
+          <div class="tool-hover-tip">
+           <span class="text space">踩</span>
+          </div> </li> 
+         <li class="tool-item tool-item-size tool-active is-collection "> <a class="tool-item-href" href="javascript:;" data-report-click="{&quot;mod&quot;:&quot;popu_824&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4130&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img style="display:none" id="is-collection-img-collection" class="animation-dom active-animation" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/collect-active.png" alt=""> <img class="isdefault" id="is-collection-img" style="display:block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/collect.png" alt=""> <img class="isactive" id="is-collection-imgactive" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCollectActive.png" alt=""> <span class="count get-collection " data-num="51" id="get-collection"> 51 </span> </a> 
+          <div class="tool-hover-tip collect"> 
+           <div class="collect-operate-box"> 
+            <span class="collect-text" id="is-collection"> 收藏 </span> 
+           </div> 
+          </div> 
+          <div class="tool-active-list"> 
+           <div class="text">
+             觉得还不错? 
+            <span class="collect-text" id="tool-active-list-collection"> 一键收藏 </span> 
+            <img id="tool-active-list-close" src="https://csdnimg.cn/release/blogv2/dist/pc/img/collectionCloseWhite.png" alt=""> 
+           </div> 
+          </div> </li> 
+         <li class="tool-item tool-item-size tool-active tool-item-comment"> 
+          <div class="guide-rr-first"> 
+           <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/guideRedReward01.png" alt=""> 
+           <button class="btn-guide-known">知道了</button> 
+          </div> <a class="tool-item-href go-side-comment" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.7009&quot;}"> <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/comment.png" alt=""> <span class="count"> 0 </span> </a> 
+          <div class="tool-hover-tip">
+           <span class="text space">评论</span>
+          </div> </li> 
+         <li class="tool-item tool-item-size tool-active tool-QRcode" data-type="article" id="tool-share"> <a class="tool-item-href" href="javascript:;" data-report-view="{&quot;spm&quot;:&quot;3001.4129&quot;,&quot;extra&quot;:{&quot;type&quot;:&quot;blogdetail&quot;}}"> <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/share.png" alt=""> <span class="count">分享</span> </a> 
+          <div class="QRcode active" id="tool-QRcode"> 
+           <div class="share-bg-box"> 
+            <div class="share-content"> 
+             <a id="copyPosterUrl" data-type="link" class="btn-share">复制链接</a> 
+            </div> 
+            <div class="share-content"> 
+             <a class="btn-share" data-type="qq">分享到 QQ</a> 
+            </div> 
+            <div class="share-content"> 
+             <a class="btn-share" data-type="weibo">分享到新浪微博</a> 
+            </div> 
+            <div class="share-code"> 
+             <div class="share-code-box" id="shareCode"></div> 
+             <div class="share-code-text"> 
+              <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/share/icon-wechat.png" alt="">扫一扫 
+             </div> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="tool-item tool-item-size tool-active is-more" id="is-more"> <a class="tool-item-href"> <img class="isdefault" style="margin-right:0px;display:block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/more.png" alt=""> <span class="count"></span> </a> 
+          <div class="more-opt-box"> 
+           <div class="mini-box"> 
+            <a class="tool-item-href" id="toolReportBtnHide"> <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/report.png" alt=""> <span class="count">举报</span> </a> 
+           </div> 
+           <div class="normal-box"> 
+            <a class="tool-item-href" id="toolReportBtnHideNormal"> <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/report.png" alt=""> <span class="count">举报</span> </a> 
+           </div> 
+          </div> </li> 
+        </ul> 
+       </div> 
+       <div class="toolbox-right"> 
+        <div class="tool-directory"> 
+         <a class="bt-columnlist-show" data-id="11168488" data-free="true" data-description="" data-subscribe="false" data-title="算法分析与设计" data-img="https://i-blog.csdnimg.cn/columns/default/20201014180756919.png?x-oss-process=image/resize,m_fixed,h_224,w_224" data-url="https://blog.csdn.net/nikolalala/category_11168488.html" data-sum="2" data-people="4" data-price="0" data-hotrank="0" data-status="true" data-oldprice="0" data-join="false" data-studyvip="true" data-studysubscribe="false" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.6334&quot;,&quot;extend1&quot;:&quot;专栏目录&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6334&quot;,&quot;extend1&quot;:&quot;专栏目录&quot;}">专栏目录</a> 
+        </div> 
+       </div> 
+      </div> 
+     </div>   
+     <a id="commentBox" name="commentBox"></a> 
+     <div id="pcCommentBox" class="comment-box comment-box-new2 login-comment-box-new" style="display:none"> 
+      <div class="has-comment" style="display:block"> 
+       <div class="one-line-box"> 
+        <div class="has-comment-tit go-side-comment"> 
+         <span class="count">0</span>&nbsp;条评论 
+        </div> 
+        <div class="has-comment-con comment-operate-item"></div> 
+        <a class="has-comment-bt-right go-side-comment focus">写评论</a> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="first-recommend-box recommend-box recommend-highlight-default"> 
+      <div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_55085530/article/details/125437260" data-report-view="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6661.1&quot;,&quot;mod&quot;:&quot;popu_871&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-125437260-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;1&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/weixin_55085530/article/details/125437260&quot;}"> 
+       <div class="content-box"> 
+        <div class="content-blog display-flex"> 
+         <div class="title-box"> 
+          <span class="type"> <img src="https://csdnimg.cn/release/blogv2/dist/components/img/blogType.png" alt=""> <span class="tip">博客</span> </span> 
+          <a href="https://blog.csdn.net/weixin_55085530/article/details/125437260" class="tit" target="_blank" data-report-click="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6661.1&quot;,&quot;mod&quot;:&quot;popu_871&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-125437260-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;1&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/weixin_55085530/article/details/125437260&quot;}" data-report-query="spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125437260-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125437260-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1"> 
+           <div class="left ellipsis-online ellipsis-online-1">
+            <em>算法</em>
+            <em>设计</em>与
+            <em>分析</em>
+            <em>期末</em>
+            <em>复习</em>题
+           </div> </a> 
+         </div> 
+         <div class="info-box display-flex"> 
+          <div class="info"> 
+           <a href="https://blog.csdn.net/weixin_55085530" target="_blank"><span class="blog-title">Galaxy</span></a> 
+          </div> 
+          <div class="info display-flex"> 
+           <span class="info-block time">06-24</span> 
+           <span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> 9743 </span> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="desc-box"> 
+         <a href="https://blog.csdn.net/weixin_55085530/article/details/125437260" target="_blank" data-report-click="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6661.1&quot;,&quot;mod&quot;:&quot;popu_871&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-125437260-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;1&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/weixin_55085530/article/details/125437260&quot;}" data-report-query="spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125437260-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125437260-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1"> 
+          <div class="desc ellipsis-online ellipsis-online-1">
+           <em>算法</em>
+           <em>设计</em>与
+           <em>分析</em>
+           <em>期末</em>
+           <em>复习</em>题
+          </div> </a> 
+        </div> 
+       </div> 
+      </div> 
+     </div>  
+     <div class="second-recommend-box recommend-box recommend-highlight-default"> 
+      <div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/qq_39480177/article/details/135375142" data-report-view="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6650.1&quot;,&quot;mod&quot;:&quot;popu_387&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-135375142-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;1&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_39480177/article/details/135375142&quot;}"> 
+       <div class="content-box"> 
+        <div class="content-blog display-flex"> 
+         <div class="title-box"> 
+          <span class="type"> <img src="https://csdnimg.cn/release/blogv2/dist/components/img/blogType.png" alt=""> <span class="tip">博客</span> </span> 
+          <a href="https://blog.csdn.net/qq_39480177/article/details/135375142" class="tit" target="_blank" data-report-click="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6650.1&quot;,&quot;mod&quot;:&quot;popu_387&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-135375142-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;1&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_39480177/article/details/135375142&quot;}" data-report-query="spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-135375142-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-135375142-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1"> 
+           <div class="left ellipsis-online ellipsis-online-1">
+            <em>湖南大学</em>-
+            <em>算法</em>
+            <em>设计</em>与
+            <em>分析</em>-2023
+            <em>期末</em>考试【原题】
+           </div> 
+           <div class="tag">
+            最新发布
+           </div> </a> 
+         </div> 
+         <div class="info-box display-flex"> 
+          <div class="info"> 
+           <a href="https://blog.csdn.net/qq_39480177" target="_blank"><span class="blog-title">wolf的博客</span></a> 
+          </div> 
+          <div class="info display-flex"> 
+           <span class="info-block time">01-03</span> 
+           <span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> 2216 </span> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="desc-box"> 
+         <a href="https://blog.csdn.net/qq_39480177/article/details/135375142" target="_blank" data-report-click="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6650.1&quot;,&quot;mod&quot;:&quot;popu_387&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-135375142-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;1&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_39480177/article/details/135375142&quot;}" data-report-query="spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-135375142-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-135375142-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1"> 
+          <div class="desc ellipsis-online ellipsis-online-1">
+           21：00刚刚结束的考试，凭着回忆把题目重现出来了，在
+           <em>复习</em>的时候根本找不到往年的试卷，希望这张回忆的试卷能帮助到下一届的同学。这场考试太不容易，题量太大了，没写完，寄了。
+          </div> </a> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="recommend-box insert-baidu-box  recommend-highlight-default"> 
+      <div class="recommend-item-box no-index" style="display:none"></div> 
+      <div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/jeanFlower/article/details/53232969" data-report-view="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6650.2&quot;,&quot;mod&quot;:&quot;popu_387&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-53232969-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;2&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/jeanFlower/article/details/53232969&quot;}"> 
+       <div class="content-box"> 
+        <div class="content-blog display-flex"> 
+         <div class="title-box"> 
+          <span class="type"> <img src="https://csdnimg.cn/release/blogv2/dist/components/img/blogType.png" alt=""> <span class="tip">博客</span> </span> 
+          <a href="https://blog.csdn.net/jeanFlower/article/details/53232969" class="tit" target="_blank" data-report-click="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6650.2&quot;,&quot;mod&quot;:&quot;popu_387&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-53232969-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;2&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/jeanFlower/article/details/53232969&quot;}" data-report-query="spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-53232969-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-53232969-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1"> 
+           <div class="left ellipsis-online ellipsis-online-1">
+            用
+            <em>动态规划</em>求解调度问题
+           </div> </a> 
+         </div> 
+         <div class="info-box display-flex"> 
+          <div class="info"> 
+           <a href="https://blog.csdn.net/jeanFlower" target="_blank"><span class="blog-title">jeanFlower的博客</span></a> 
+          </div> 
+          <div class="info display-flex"> 
+           <span class="info-block time">11-19</span> 
+           <span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> 5378 </span> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="desc-box"> 
+         <a href="https://blog.csdn.net/jeanFlower/article/details/53232969" target="_blank" data-report-click="{&quot;ab&quot;:&quot;new&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6650.2&quot;,&quot;mod&quot;:&quot;popu_387&quot;,&quot;extra&quot;:&quot;{\&quot;highlightScore\&quot;:0.0,\&quot;utm_medium\&quot;:\&quot;distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-53232969-blog-118334704.235^v43^pc_blog_bottom_relevance_base1\&quot;,\&quot;dist_request_id\&quot;:\&quot;1736064058662_23313\&quot;}&quot;,&quot;dist_request_id&quot;:&quot;1736064058662_23313&quot;,&quot;ab_strategy&quot;:&quot;vipdefault&quot;,&quot;index&quot;:&quot;2&quot;,&quot;strategy&quot;:&quot;2~default~BlogCommendFromBaidu~Rate&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/jeanFlower/article/details/53232969&quot;}" data-report-query="spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-53232969-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-53232969-blog-118334704.235%5Ev43%5Epc_blog_bottom_relevance_base1"> 
+          <div class="desc ellipsis-online ellipsis-online-1">
+           有n个工件，j1, j2, …, jn, 每个工件有一个给定的最小加工时间pj , 以及一个权重wj 1j, 同样的结束时间Ｃj = sj + p(B)，j∈B，　这里p(B)=max{pj} j∈B。 从一批工件开始加工到结束中间不允许中断。 &nbsp; 请问：如何给这些工件分批，以及如何对这些批进行排序使得所有工件的加权完成时间之和 Σwj*Ｃj&nbsp;(j=1到n) &nbsp; 最小。 &nbsp; 请
+           <em>设计</em>一个
+          </div> </a> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="blog-footer-bottom" style="margin-top:10px;"></div>   
+    </main> 
+    <aside class="blog_container_aside"> 
+     <div id="asideProfile" class="aside-box"> 
+      <div class="profile-intro d-flex"> 
+       <div class="avatar-box d-flex justify-content-center flex-column"> 
+        <a href="https://blog.csdn.net/nikolalala" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_379&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4121&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img src="https://profile-avatar.csdnimg.cn/a2aab5fb8a91466f858863a9fcbb7556_nikolalala.jpg!1" class="avatar_pic"> </a> 
+       </div> 
+       <div class="user-info d-flex flex-column profile-intro-name-box"> 
+        <div class="profile-intro-name-boxTop"> 
+         <a href="https://blog.csdn.net/nikolalala" target="_blank" class="" id="uid" title="iamnii-" data-report-click="{&quot;mod&quot;:&quot;popu_379&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4122&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala&quot;,&quot;ab&quot;:&quot;new&quot;}"> <span class="name " username="nikolalala">iamnii-</span> </a> 
+         <span> </span> 
+         <span class="flag expert-blog"> <span class="bubble">CSDN认证博客专家</span> </span> 
+         <span class="flag company-blog"> <span class="bubble">CSDN认证企业博客</span> </span> 
+        </div> 
+        <div class="profile-intro-name-boxFooter"> 
+         <span class="personal-home-page personal-home-years" title="已加入 CSDN 6年">码龄6年</span> 
+         <span class="personal-home-page"> <a class="personal-home-certification" href="https://i.csdn.net/#/uc/profile?utm_source=14998968" target="_blank" title="暂无认证"> <img src="https://csdnimg.cn/identity/nocErtification.png" alt=""> 暂无认证 </a> </span> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="data-info d-flex item-tiling"> 
+       <dl class="text-center" title="6"> 
+        <a href="https://blog.csdn.net/nikolalala" data-report-click="{&quot;mod&quot;:&quot;1598321000_001&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4310&quot;}" data-report-query="t=1"> 
+         <dt>
+          <span class="count">6</span>
+         </dt> 
+         <dd class="font">
+          原创
+         </dd> </a> 
+       </dl> 
+       <dl class="text-center" data-report-click="{&quot;mod&quot;:&quot;1598321000_002&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4311&quot;}" title="1062648"> 
+        <a href="https://blog.csdn.net/rank/list/weekly" target="_blank"> 
+         <dt>
+          <span class="count">106万+</span>
+         </dt> 
+         <dd class="font">
+          周排名
+         </dd> </a> 
+       </dl> 
+       <dl class="text-center" title="1484517"> 
+        <a href="https://blog.csdn.net/rank/list/total" data-report-click="{&quot;mod&quot;:&quot;1598321000_003&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4312&quot;}" target="_blank"> 
+         <dt>
+          <span class="count">148万+</span>
+         </dt> 
+         <dd class="font">
+          总排名
+         </dd> </a> 
+       </dl> 
+       <dl class="text-center" style="min-width:58px" title="18118"> 
+        <dt>
+         <span class="count">1万+</span>
+        </dt> 
+        <dd>
+         访问
+        </dd> 
+       </dl> 
+       <dl class="text-center" title="2级,点击查看等级说明"> 
+        <dt>
+         <a href="https://blog.csdn.net/blogdevteam/article/details/103478461" target="_blank"> <img class="level" src="https://csdnimg.cn/identity/blog2.png"> </a> 
+        </dt> 
+        <dd>
+         等级
+        </dd> 
+       </dl> 
+      </div> 
+      <div class="item-rank"></div> 
+      <div class="data-info d-flex item-tiling"> 
+       <dl class="text-center" title="118"> 
+        <dt>
+         <span class="count">118</span>
+        </dt> 
+        <dd>
+         积分
+        </dd> 
+       </dl> 
+       <dl class="text-center" id="fanBox" title="38"> 
+        <dt>
+         <span class="count" id="fan">38</span>
+        </dt> 
+        <dd>
+         粉丝
+        </dd> 
+       </dl> 
+       <dl class="text-center" title="51"> 
+        <dt>
+         <span class="count">51</span>
+        </dt> 
+        <dd>
+         获赞
+        </dd> 
+       </dl> 
+       <dl class="text-center" title="4"> 
+        <dt>
+         <span class="count">4</span>
+        </dt> 
+        <dd>
+         评论
+        </dd> 
+       </dl> 
+       <dl class="text-center" title="229"> 
+        <dt>
+         <span class="count">229</span>
+        </dt> 
+        <dd>
+         收藏
+        </dd> 
+       </dl> 
+      </div> 
+      <div class="aside-box-footer" data-report-view="{&quot;spm&quot;:&quot;3001.4296&quot;}"> 
+       <div class="badge-box d-flex"> 
+        <div class="badge d-flex"> 
+         <div class="icon-badge" title="新秀勋章"> 
+          <div class="mouse-box"> 
+           <img class="medal-img" data-report-click="{&quot;spm&quot;:&quot;3001.4296&quot;}" src="https://csdnimg.cn/medal/xinxiu@240.png" alt="新秀勋章"> 
+          </div> 
+         </div> 
+         <div class="icon-badge" title="创作能手"> 
+          <div class="mouse-box"> 
+           <img class="medal-img" data-report-click="{&quot;spm&quot;:&quot;3001.4296&quot;}" src="https://csdnimg.cn/medal/qixiebiaobing4@240.png" alt="创作能手"> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="profile-intro-name-boxOpration"> 
+       <div class="opt-letter-watch-box"> 
+        <a rel="noopener" class="bt-button personal-letter" href="https://im.csdn.net/chat/nikolalala" target="_blank">私信</a> 
+       </div> 
+       <div class="opt-letter-watch-box"> 
+        <a class="personal-watch bt-button" id="btnAttent">关注</a> 
+       </div> 
+      </div> 
+     </div> 
+     <a id="remuneration" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.9809&quot;}" rel="nofollow" href="" class="remuneration-box"> <img src="" alt=""> </a> 
+     <div id="asideWriteGuide" class="aside-box side-write-guide-box type-1" data-report-view="{&quot;spm&quot;:&quot;3001.9727&quot;}"> 
+      <div class="content-box"> 
+       <a rel="nofollow" href="https://mp.csdn.net" target="_blank" class="btn-go-write" data-report-query="spm=3001.9727" data-report-click="{&quot;spm&quot;:&quot;3001.9727&quot;}"> <img src="https://img-home.csdnimg.cn/images/20240218021837.png" alt="写文章"> </a> 
+      </div> 
+     </div> 
+     <div id="asideSearchArticle" class="aside-box"> 
+      <div class="aside-content search-comter"> 
+       <div class="aside-search aside-search-blog"> 
+        <input type="text" class="input-serch-blog" name="" autocomplete="off" value="" id="search-blog-words" placeholder="搜博主文章"> 
+        <a class="btn-search-blog" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.9182&quot;}"> <img src="https://csdnimg.cn/cdn/content-toolbar/csdn-sou.png?v=1587021042"> </a> 
+       </div> 
+      </div> 
+     </div> 
+     <div id="asideHotArticle" class="aside-box"> 
+      <h3 class="aside-title">热门文章</h3> 
+      <div class="aside-content"> 
+       <ul class="hotArticle-list"> 
+        <li> <a href="https://blog.csdn.net/nikolalala/article/details/118338028" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_541&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4139&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028&quot;,&quot;ab&quot;:&quot;new&quot;}"> 马原复习思维导图-前三章 <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">7499</span> </a> </li> 
+        <li> <a href="https://blog.csdn.net/nikolalala/article/details/120349494" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_541&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4139&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/120349494&quot;,&quot;ab&quot;:&quot;new&quot;}"> 【HNU小学期硬件实训】基于QT上位机的汽车监控警报系统 <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">3680</span> </a> </li> 
+        <li> <a href="https://blog.csdn.net/nikolalala/article/details/124406277" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_541&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4139&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/124406277&quot;,&quot;ab&quot;:&quot;new&quot;}"> HNU数据库实验三：完整性定义与检查 <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">2675</span> </a> </li> 
+        <li> <a href="https://blog.csdn.net/nikolalala/article/details/118334704" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_541&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4139&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118334704&quot;,&quot;ab&quot;:&quot;new&quot;}"> 湖南大学算法分析与设计期末总复习上（分治、动态规划，贪心部分） <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">1695</span> </a> </li> 
+        <li> <a href="https://blog.csdn.net/nikolalala/article/details/124211205" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_541&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4139&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/124211205&quot;,&quot;ab&quot;:&quot;new&quot;}"> 实验1数据库定义实验 <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">1469</span> </a> </li> 
+       </ul> 
+      </div> 
+     </div> 
+     <div id="asideCategory" class="aside-box "> 
+      <h3 class="aside-title">分类专栏</h3> 
+      <div class="aside-content"> 
+       <ul> 
+        <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/nikolalala/category_11761422.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/category_11761422.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+          <div class="special-column-bar "></div> <img src="https://i-blog.csdnimg.cn/columns/default/20201014180756738.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class="title oneline"> 数据库 </span> </a> <span class="special-column-num">2篇</span> </li> 
+        <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/nikolalala/category_11168488.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/category_11168488.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+          <div class="special-column-bar "></div> <img src="https://i-blog.csdnimg.cn/columns/default/20201014180756919.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class="title oneline"> 算法分析与设计 </span> </a> <span class="special-column-num">2篇</span> </li> 
+       </ul> 
+      </div> 
+     </div> 
+     <div id="asideNewComments" class="aside-box"> 
+      <h3 class="aside-title">最新评论</h3> 
+      <div class="aside-content"> 
+       <ul class="newcomment-list"> 
+        <li> <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/nikolalala/article/details/118338028#comments_30517831" data-report-click="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_30517831&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_30517831&quot;,&quot;ab&quot;:&quot;new&quot;}">马原复习思维导图-前三章</a> <p class="comment ellipsis"> <a href="https://blog.csdn.net/orlsyand" class="user-name" target="_blank">orlsyand: </a> <span class="code-comments">写得太好了！！！！</span> </p> </li> 
+        <li> <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/nikolalala/article/details/118338028#comments_20716491" data-report-click="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_20716491&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_20716491&quot;,&quot;ab&quot;:&quot;new&quot;}">马原复习思维导图-前三章</a> <p class="comment ellipsis"> <a href="https://blog.csdn.net/m0_62992598" class="user-name" target="_blank">biile: </a> <span class="code-comments">好滴感谢～</span> </p> </li> 
+        <li> <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/nikolalala/article/details/118338028#comments_20689088" data-report-click="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_20689088&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_20689088&quot;,&quot;ab&quot;:&quot;new&quot;}">马原复习思维导图-前三章</a> <p class="comment ellipsis"> <a href="https://blog.csdn.net/nikolalala" class="user-name" target="_blank">iamnii-: </a> <span class="code-comments">18版的哦</span> </p> </li> 
+        <li> <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/nikolalala/article/details/118338028#comments_20285363" data-report-click="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_20285363&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_542&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4231&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/118338028#comments_20285363&quot;,&quot;ab&quot;:&quot;new&quot;}">马原复习思维导图-前三章</a> <p class="comment ellipsis"> <a href="https://blog.csdn.net/m0_62992598" class="user-name" target="_blank">biile: </a> <span class="code-comments">请问这是2021版的还是2018版的呀，谢谢</span> </p> </li> 
+       </ul> 
+      </div> 
+     </div> 
+     <div id="asideHotArticle" class="aside-box"> 
+      <h3 class="aside-title">大家在看</h3> 
+      <div class="aside-content"> 
+       <ul class="hotArticle-list"> 
+        <li> <a href="https://blog.csdn.net/m0_51275144/article/details/144943218" target="_blank" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/m0_51275144/article/details/144943218&quot;,&quot;strategy&quot;:&quot;202_1052723-2248185_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/m0_51275144/article/details/144943218&quot;,&quot;strategy&quot;:&quot;202_1052723-2248185_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}"> JUC--如果简历上写了synchronized，需要掌握到什么程度？（万字图文深度解析synchronized关键字） <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">778</span> </a> </li> 
+        <li> <a href="https://blog.csdn.net/2401_89473361/article/details/144925381" target="_blank" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/2401_89473361/article/details/144925381&quot;,&quot;strategy&quot;:&quot;202_1052723-2248694_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/2401_89473361/article/details/144925381&quot;,&quot;strategy&quot;:&quot;202_1052723-2248694_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}"> Java 8系列之重新认识HashMap15 <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">480</span> </a> </li> 
+        <li> <a href="https://blog.csdn.net/wuzhou202/article/details/144946485" target="_blank" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/wuzhou202/article/details/144946485&quot;,&quot;strategy&quot;:&quot;202_1052723-2248926_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/wuzhou202/article/details/144946485&quot;,&quot;strategy&quot;:&quot;202_1052723-2248926_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}"> 2025毕设ssm实验室安全管理程序+论文 </a> </li> 
+        <li> <a href="https://blog.csdn.net/qq_36666115/article/details/144943242" target="_blank" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_36666115/article/details/144943242&quot;,&quot;strategy&quot;:&quot;202_1052723-2248230_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_36666115/article/details/144943242&quot;,&quot;strategy&quot;:&quot;202_1052723-2248230_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}"> 【USRP】教程：在Ubuntu上安装UHD驱动（最正确的安装方法） <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">82</span> </a> </li> 
+        <li> <a href="https://blog.csdn.net/yang10940/article/details/144941374" target="_blank" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/yang10940/article/details/144941374&quot;,&quot;strategy&quot;:&quot;202_1052723-2248624_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.10093&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/yang10940/article/details/144941374&quot;,&quot;strategy&quot;:&quot;202_1052723-2248624_RCMD&quot;,&quot;ab&quot;:&quot;new&quot;}"> 面试官问：深度网络中loss除以10和学习率除以10等价吗 <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt=""> <span class="read">397</span> </a> </li> 
+       </ul> 
+      </div> 
+     </div> 
+     <div id="asideArchive" class="aside-box" style="display:block!important; width:300px;"> 
+      <h3 class="aside-title">最新文章</h3> 
+      <div class="aside-content"> 
+       <ul class="inf_list clearfix"> 
+        <li class="clearfix"> <a href="https://blog.csdn.net/nikolalala/article/details/124406277" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_382&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4136&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/124406277&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_382&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/124406277&quot;,&quot;ab&quot;:&quot;new&quot;}">HNU数据库实验三：完整性定义与检查</a> </li> 
+        <li class="clearfix"> <a href="https://blog.csdn.net/nikolalala/article/details/124211205" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_382&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4136&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/124211205&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_382&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/124211205&quot;,&quot;ab&quot;:&quot;new&quot;}">实验1数据库定义实验</a> </li> 
+        <li class="clearfix"> <a href="https://blog.csdn.net/nikolalala/article/details/120349494" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_382&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4136&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/120349494&quot;,&quot;ab&quot;:&quot;new&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_382&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/article/details/120349494&quot;,&quot;ab&quot;:&quot;new&quot;}">【HNU小学期硬件实训】基于QT上位机的汽车监控警报系统</a> </li> 
+       </ul> 
+       <div class="archive-bar"></div> 
+       <div class="archive-box"> 
+        <div class="archive-list-item">
+         <a href="https://blog.csdn.net/nikolalala?type=blog&amp;year=2022&amp;month=04" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_538&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4138&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala?type=blog&amp;year=2022&amp;month=04&quot;}"><span class="year">2022年</span><span class="num">2篇</span></a>
+        </div> 
+        <div class="archive-list-item">
+         <a href="https://blog.csdn.net/nikolalala?type=blog&amp;year=2021&amp;month=09" target="_blank" data-report-click="{&quot;mod&quot;:&quot;popu_538&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4138&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala?type=blog&amp;year=2021&amp;month=09&quot;}"><span class="year">2021年</span><span class="num">4篇</span></a>
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <!-- 详情页显示目录 --> 
+     <!--文章目录--> 
+     <div id="asidedirectory" class="aside-box"> 
+      <div class="groupfile" id="directory"> 
+       <h3 class="aside-title">目录</h3> 
+       <div class="align-items-stretch group_item"> 
+        <div class="pos-box"> 
+         <div class="scroll-box"> 
+          <div class="toc-box"></div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside>    
+   </div> 
+   <div class="recommend-right align-items-stretch clearfix" id="rightAside" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right"> 
+      <div class="flex-column aside-box groupfile" id="groupfile"> 
+       <div class="groupfile-div"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="aside-box kind_person d-flex flex-column"> 
+       <h3 class="aside-title">分类专栏</h3> 
+       <div class="align-items-stretch kindof_item" id="kind_person_column"> 
+        <div class="aside-content"> 
+         <ul> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/nikolalala/category_11761422.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/category_11761422.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://i-blog.csdnimg.cn/columns/default/20201014180756738.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 数据库 </span> </a> <span class="special-column-num">2篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/nikolalala/category_11168488.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/nikolalala/category_11168488.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://i-blog.csdnimg.cn/columns/default/20201014180756919.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 算法分析与设计 </span> </a> <span class="special-column-num">2篇</span> </li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+   <div class="recommend-right1  align-items-stretch clearfix" id="rightAsideConcision" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right-concision"> 
+      <div class="flex-column aside-box groupfile" id="groupfileConcision"> 
+       <div class="groupfile-div1"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+  </div> 
+  <div class="mask-dark"></div> 
+  <div class="skin-boxshadow"></div> 
+  <div class="directory-boxshadow"></div> 
+  <div class="comment-side-box-shadow comment-side-tit-close" id="commentSideBoxshadow"> 
+   <div class="comment-side-content"> 
+    <div class="comment-side-tit"> 
+     <span class="comment-side-tit-count">评论</span> 
+     <img class="comment-side-tit-close" src="https://csdnimg.cn/release/blogv2/dist/pc/img/closeBt.png">
+    </div> 
+    <div id="pcCommentSideBox" class="comment-box comment-box-new2 " style="display:block"> 
+     <div class="comment-edit-box d-flex"> 
+      <div class="user-img"> 
+       <a href="https://blog.csdn.net/m0_75101473" target="_blank"> <img src="https://profile-avatar.csdnimg.cn/default.jpg!1"> </a> 
+      </div> 
+      <form id="commentform"> 
+       <textarea class="comment-content" name="comment_content" id="comment_content" placeholder="欢迎高质量的评论，低质的评论会被折叠" maxlength="1000"></textarea> 
+       <div class="comment-reward-box" style="background-image: url('https://img-home.csdnimg.cn/images/20230131025301.png');"> 
+        <a class="btn-remove-reward"></a> 
+        <div class="form-reward-box"> 
+         <div class="info">
+           成就一亿技术人! 
+         </div> 
+         <div class="price-info">
+           拼手气红包
+          <span class="price">6.0元</span> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="comment-operate-box"> 
+        <div class="comment-operate-l"> 
+         <span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span> 
+        </div> 
+        <div class="comment-operate-c">
+          &nbsp; 
+        </div> 
+        <div class="comment-operate-r"> 
+         <div class="comment-operate-item comment-reward"> 
+          <img class="comment-operate-img" data-url="https://csdnimg.cn/release/blogv2/dist/pc/img/" src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentReward.png" alt="红包"> 
+          <span class="comment-operate-tip">添加红包</span> 
+         </div> 
+         <div class="comment-operate-item comment-emoticon"> 
+          <img class="comment-operate-img" data-url="https://csdnimg.cn/release/blogv2/dist/pc/img/" src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentEmotionIcon.png" alt="表情包"> 
+          <span class="comment-operate-tip">插入表情</span> 
+          <div class="comment-emoticon-box comment-operate-isshow"> 
+           <div class="comment-emoticon-img-box"></div> 
+          </div> 
+         </div> 
+         <div class="comment-operate-item comment-code"> 
+          <img class="comment-operate-img" data-url="https://csdnimg.cn/release/blogv2/dist/pc/img/" src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentCodeIcon.png" alt="表情包"> 
+          <span class="comment-operate-tip">代码片</span> 
+          <div class="comment-code-box comment-operate-isshow"> 
+           <ul id="commentCode"> 
+            <li><a data-code="html">HTML/XML</a></li> 
+            <li><a data-code="objc">objective-c</a></li> 
+            <li><a data-code="ruby">Ruby</a></li> 
+            <li><a data-code="php">PHP</a></li> 
+            <li><a data-code="csharp">C</a></li> 
+            <li><a data-code="cpp">C++</a></li> 
+            <li><a data-code="javascript">JavaScript</a></li> 
+            <li><a data-code="python">Python</a></li> 
+            <li><a data-code="java">Java</a></li> 
+            <li><a data-code="css">CSS</a></li> 
+            <li><a data-code="sql">SQL</a></li> 
+            <li><a data-code="plain">其它</a></li> 
+           </ul> 
+          </div> 
+         </div> 
+         <div class="comment-operate-item"> 
+          <input type="hidden" id="comment_replyId" name="comment_replyId"> 
+          <input type="hidden" id="article_id" name="article_id" value="118334704"> 
+          <input type="hidden" id="comment_userId" name="comment_userId" value=""> 
+          <input type="hidden" id="commentId" name="commentId" value=""> 
+          <a data-report-click="{&quot;mod&quot;:&quot;1582594662_003&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4227&quot;,&quot;ab&quot;:&quot;new&quot;}"> <input type="submit" class="btn-comment btn-comment-input" value="评论"> </a> 
+         </div> 
+        </div> 
+       </div> 
+      </form> 
+     </div> 
+     <div class="comment-list-container"> 
+      <div class="comment-list-box comment-operate-item"> 
+      </div> 
+      <div id="lookFlodComment" class="look-flod-comment"> 
+       <span class="count"></span>&nbsp;条评论被折叠&nbsp;
+       <a class="look-more-flodcomment">查看</a> 
+      </div> 
+      <div class="opt-box text-center"> 
+       <div class="btn btn-sm btn-link-blue" id="btnMoreComment"></div> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="pcFlodCommentSideBox" class="pc-flodcomment-sidebox"> 
+     <div class="comment-fold-tit">
+      <span id="lookUnFlodComment" class="back"><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowLeftWhite.png" alt=""></span>被折叠的&nbsp;
+      <span class="count"></span>&nbsp;条评论 
+      <a href="https://blogdev.blog.csdn.net/article/details/122245662" class="tip" target="_blank">为什么被折叠?</a> 
+      <a href="https://bbs.csdn.net/forums/FreeZone" class="park" target="_blank"> <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/iconPark.png">到【灌水乐园】发言</a> 
+     </div> 
+     <div class="comment-fold-content"></div> 
+     <div id="lookBadComment" class="look-bad-comment side-look-comment"> 
+      <a class="look-more-comment">查看更多评论<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowDownWhite.png" alt=""></a> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="comment-rewarddialog-box"> 
+    <div class="form-box"> 
+     <div class="title-box">
+       添加红包 
+      <a class="btn-form-close"></a> 
+     </div> 
+     <form id="commentRewardForm"> 
+      <div class="ipt-box"> 
+       <label for="txtName">祝福语</label> 
+       <div class="ipt-btn-box"> 
+        <input type="text" name="name" id="txtName" autocomplete="off" maxlength="50"> 
+        <a class="btn-ipt btn-random"></a> 
+       </div> 
+       <p class="notice">请填写红包祝福语或标题</p> 
+      </div> 
+      <div class="ipt-box"> 
+       <label for="txtSendAmount">红包数量</label> 
+       <div class="ipt-txt-box"> 
+        <input type="text" name="sendAmount" maxlength="4" id="txtSendAmount" placeholder="请填写红包数量(最小10个)" autocomplete="off"> 
+        <span class="after-txt">个</span> 
+       </div> 
+       <p class="notice">红包个数最小为10个</p> 
+      </div> 
+      <div class="ipt-box"> 
+       <label for="txtMoney">红包总金额</label> 
+       <div class="ipt-txt-box error"> 
+        <input type="text" name="money" maxlength="5" id="txtMoney" placeholder="请填写总金额(最低5元)" autocomplete="off"> 
+        <span class="after-txt">元</span> 
+       </div> 
+       <p class="notice">红包金额最低5元</p> 
+      </div> 
+      <div class="balance-info-box"> 
+       <label>余额支付</label> 
+       <div class="balance-info">
+         当前余额
+        <span class="balance">3.43</span>元 
+        <a href="https://i.csdn.net/#/wallet/balance/recharge" class="link-charge" target="_blank">前往充值 &gt;</a> 
+       </div> 
+      </div> 
+      <div class="opt-box"> 
+       <div class="pay-info">
+         需支付：
+        <span class="price">10.00</span>元 
+       </div> 
+       <button type="button" class="ml-auto btn-cancel">取消</button> 
+       <button type="button" class="ml8 btn-submit" disabled="true">确定</button> 
+      </div> 
+     </form> 
+    </div> 
+   </div> 
+   <div class="rr-guide-box"> 
+    <div class="rr-first-box"> 
+     <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/guideRedReward02.png" alt=""> 
+     <button class="btn-guide-known next">下一步</button> 
+    </div> 
+    <div class="rr-second-box"> 
+     <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/guideRedReward03.png" alt=""> 
+     <button class="btn-guide-known known">知道了</button> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="redEnvolope" id="redEnvolope"> 
+   <div class="env-box"> 
+    <div class="env-container"> 
+     <div class="pre-open" id="preOpen"> 
+      <div class="top"> 
+       <header> 
+        <img class="clearTpaErr" :src="redpacketAuthor.avatar" alt=""> 
+        <div class="author">
+         成就一亿技术人!
+        </div> 
+       </header> 
+       <div class="bot-icon"></div> 
+      </div> 
+      <footer> 
+       <div class="red-openbtn open-start"></div> 
+       <div class="tip">
+         领取后你会自动成为博主和红包主的粉丝 
+        <a class="rule" target="_blank">规则</a> 
+       </div> 
+      </footer> 
+     </div> 
+     <div class="opened" id="opened"> 
+      <div class="bot-icon"> 
+       <header> 
+        <a class="creatorUrl" href="" target="_blank"> <img class="clearTpaErr" src="https://profile-avatar.csdnimg.cn/default.jpg!2" alt=""> </a> 
+        <div class="author"> 
+         <div class="tt">
+          hope_wisdom
+         </div> 发出的红包 
+        </div> 
+       </header> 
+      </div> 
+      <div class="receive-box"> 
+       <header></header> 
+       <div class="receive-list"> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="close-btn"></div> 
+   </div> 
+  </div> 
+  <div class="pay-code"> 
+   <div class="pay-money">
+    实付
+    <span class="pay-money-span" data-nowprice="" data-oldprice="">元</span>
+   </div> 
+   <div class="content-blance">
+    <a class="blance-bt" href="javascript:;">使用余额支付</a>
+   </div> 
+   <div class="content-code"> 
+    <div id="payCode" data-id=""> 
+     <div class="renovate"> 
+      <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-time-out.png"> 
+      <span>点击重新获取</span> 
+     </div> 
+    </div> 
+    <div class="pay-style">
+     <span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/weixin.png"></span>
+     <span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/zhifubao.png"></span>
+     <span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/jingdong.png"></span>
+     <span class="text">扫码支付</span>
+    </div> 
+   </div> 
+   <div class="bt-close"> 
+    <svg t="1567152543821" class="icon" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10924" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12"> 
+     <defs> 
+      <style type="text/css"></style> 
+     </defs> 
+     <path d="M512 438.378667L806.506667 143.893333a52.032 52.032 0 1 1 73.6 73.621334L585.621333 512l294.485334 294.485333a52.074667 52.074667 0 0 1-73.6 73.642667L512 585.621333 217.514667 880.128a52.053333 52.053333 0 1 1-73.621334-73.642667L438.378667 512 143.893333 217.514667a52.053333 52.053333 0 1 1 73.621334-73.621334L512 438.378667z" fill="" p-id="10925"></path> 
+    </svg> 
+   </div> 
+   <div class="pay-balance"> 
+    <input type="radio" class="pay-code-radio" data-type="details"> 
+    <span class="span">钱包余额</span> 
+    <span class="balance" style="color:#FC5531;font-size:14px;">0</span> 
+    <div class="pay-code-tile"> 
+     <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-help.png" alt=""> 
+     <div class="pay-code-content"> 
+      <div class="span"> 
+       <p class="title">抵扣说明：</p> 
+       <p> 1.余额是钱包充值的虚拟货币，按照1:1的比例进行支付金额的抵扣。<br> 2.余额无法直接购买下载，可以购买VIP、付费专栏及课程。</p> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/recharge.png" alt=""><span>余额充值</span></a> 
+  </div> 
+  <div style="display:none;"> 
+   <img src="" onerror="setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){var test=&quot;\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74&quot;}},3000);"> 
+  </div> 
+  <div class="keyword-dec-box" id="keywordDecBox"></div>       
+  <link rel="stylesheet" href="https://g.csdnimg.cn/lib/cboxEditor/1.1.6/embed-editor.min.css"> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">            &gt;       
+ </body>
+</html>

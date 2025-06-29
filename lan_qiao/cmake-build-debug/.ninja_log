@@ -1,0 +1,6 @@
+# ninja log v5
+1	270	7282215028729142	CMakeFiles/lan_qiao.dir/main.cpp.obj	24978913959bdd3d
+271	391	7282215029876719	lan_qiao.exe	23e3eda4e3852e3b
+111	1040	0	CMakeFiles/lan_qiao.dir/GCD和LCM/gcd和lcm.cpp.obj	c05d2547238696f1
+1	1105	0	CMakeFiles/lan_qiao.dir/GCD和LCM/等差数列.cpp.obj	e4305b4de4c9c2c8
+550	2767	7478222942905036	CMakeFiles/lan_qiao.dir/dfs/dfs与排列.cpp.obj	cb9481a529b1acf0
