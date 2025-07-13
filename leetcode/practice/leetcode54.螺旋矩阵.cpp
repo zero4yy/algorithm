@@ -12,13 +12,16 @@ public:
 
         while(l <= r && u <= d) {
             for(int i = l; i <= r; i ++) res.push_back(matrix[u][i]);
-            
-            for(int i = u + 1; i <= d; i ++) res.push_back(matrix[i][r]);
-            // r --, u ++
-            for(int i = r - 1; i >= l && d > u; i --) res.push_back(matrix[d][i]);
+            u++; // 收缩上边界
 
-            for(int i = d - 1; i >= u + 1 && l < r; i --) res.push_back(matrix[i][l]);
-            l ++; r --; u ++; d --;
+            for(int i = u; i <= d; i ++) res.push_back(matrix[i][r]);
+            r--; // 收缩右边界
+
+            for(int i = r; i >= l && d >= u; i --) res.push_back(matrix[d][i]); // d >= u 避免 只有1行时重复读取
+            d--; //收缩下边界
+
+            for(int i = d; i >= u && l <= r; i --) res.push_back(matrix[i][l]);
+            l++; // 收缩左边界
         }
         return res;
     }
