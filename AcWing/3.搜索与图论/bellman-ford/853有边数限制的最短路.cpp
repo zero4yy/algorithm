@@ -1,47 +1,39 @@
-#include <iostream>
-#include <algorithm>
-#include <cstring>
+#include <bits/stdc++.h>
+
 using namespace std;
 
-const int N = 510, M = 10010;
-
+const int N = 505, M = 10005;
 int n, m, k;
 int dist[N], last[N];
 
-struct Edge
-{
-    int a, b, w;/* data */
+struct Edge {
+    int a, b, w;
 }edges[M];
 
-void bellman_ford()
-{
+void bellman_ford() {
     memset(dist, 0x3f, sizeof dist);
     dist[1] = 0;
-
-    for(int i = 0; i < k; i ++)
-    {
+    for(int i = 1; i <= k; i ++) {
         memcpy(last, dist, sizeof dist);
-        for(int j = 0; j < m; j ++)
-        {
+        for(int j = 1; j <= m; j ++) {
             auto e = edges[j];
-            dist[e.b] = min(dist[e.b], last[e.a] + e.w);            
+            
+            int a = e.a, b = e.b, w = e.w;
+            dist[b] = min(dist[b], last[a] + w);   
         }
     }
+    return;
 }
 
-int main()
-{
+int main() {
     cin >> n >> m >> k;
-    
-    for(int i = 0; i < m; i ++) 
-    {
+    for(int i = 1; i <= m; i ++) {
         int a, b, w;
         cin >> a >> b >> w;
         edges[i] = {a, b, w};
     }
     bellman_ford();
-    if(dist[n] > 0x3f3f3f3f / 2) cout << "impossible" << endl;
-    else cout << dist[n] << endl;
-
+    if(dist[n] > 0x3f3f3f3f / 2) cout << "impossible";
+    else cout << dist[n];
     return 0;
 }
