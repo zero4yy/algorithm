@@ -12,7 +12,7 @@ public:
         int x;
         for(int i = len - 1; i >= 0; i --) {
             x = temperatures[i];
-            while(st.size() && st.top().second <= x) st.pop();
+            while(st.size() && x >= st.top().second) st.pop();
             if(st.size()) ans[i] = (st.top().first - i);
             else ans[i] = 0;
             st.push({i, x});

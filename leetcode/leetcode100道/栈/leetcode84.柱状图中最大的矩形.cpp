@@ -3,7 +3,7 @@
 using namespace std;
 
 
-// 对于height[i], 找左边最近的比它小的数，找右边最近的比它小的数
+// 对于height[i], 找左边最近的比它小的数，找右边最近的比它小的数, 维护两个单调栈
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
@@ -32,6 +32,7 @@ public:
         // left+1 ~ right-1
         int ans = 0;
         for(int i = 0; i < n; i ++) {
+            // 宽度 = 右边界索引 - 左边界索引 - 1
             ans = max(ans, heights[i] * (right[i] - left[i] - 1));
         }
         return ans;
